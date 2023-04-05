@@ -34,7 +34,7 @@ let f = async () => {
 f();
 ```
 # POST
-# Async
+## Async
 ```javascript
 post(url, body, {
     onSuccess(data, status, headers, response) {
