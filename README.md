@@ -1,5 +1,5 @@
 # Importing
-Download [this file](https://disk.yandex.ru/d/S16Krj_BUvpbOg)
+Download [this file](https://github.com/vssizoff/SRequest/blob/main/sRequest.js)
 ```html
 <script src="./sRequest.js"></script>
 ```
