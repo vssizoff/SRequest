@@ -1,12 +1,11 @@
-# Importing
-Download [this file](https://github.com/vssizoff/SRequest/blob/main/sRequest.js)
 ```html
-<script src="./sRequest.js"></script>
+
+<script src="cdn.js"></script>
 ```
 # GET
 ## Async
 ```javascript
-get(url, {
+getRequest(url, {
     onSuccess(data, status, headers, response) {
         console.log(data); // parsed response
         console.log(status);
@@ -24,7 +23,7 @@ get(url, {
 ## Sync
 ```javascript
 let f = async () => {
-    let {data, status, headers, response} = await getSync(url);
+    let {data, status, headers, response} = await getRequestSync(url);
     console.log(data);
     console.log(status);
     console.log(headers);
@@ -36,7 +35,7 @@ f();
 # POST
 ## Async
 ```javascript
-post(url, body, {
+postRequest(url, body, {
     onSuccess(data, status, headers, response) {
         console.log(data);
         console.log(status);
@@ -57,7 +56,7 @@ post(url, body, {
 ## Sync
 ```javascript
 let f = async () => {
-    let {data, status, headers, response} = await postSync(url, body);
+    let {data, status, headers, response} = await postRequestSync(url, body);
     console.log(data);
     console.log(status);
     console.log(headers);
@@ -69,7 +68,7 @@ f();
 # FormData
 ## Async
 ```javascript
-formData(url, data, {
+formDataRequest(url, data, {
     onSuccess(data, status, headers, response) {
         console.log(data);
         console.log(status);
@@ -90,7 +89,7 @@ formData(url, data, {
 ## Sync
 ```javascript
 let f = async () => {
-    let {data: d, status, headers, response} = await formDataSync(url, data);
+    let {data: d, status, headers, response} = await formDataRequestSync(url, data);
     console.log(d);
     console.log(status);
     console.log(headers);
