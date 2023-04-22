@@ -4,7 +4,9 @@
 <script src="https://cdn.jsdelivr.net/gh/vssizoff/SRequest/cdn.js"></script>
 ```
 ## NPM
-
+```
+npm i srequest
+```
 # GET
 ## Async
 ```javascript
