@@ -1,6 +1,7 @@
+# Importing
+## CDN
 ```html
-
-<script src="cdn.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/vssizoff/SRequest/cdn.js"></script>
 ```
 # GET
 ## Async
