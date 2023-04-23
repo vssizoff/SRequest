@@ -5,7 +5,7 @@
 ```
 ## NPM
 ```
-npm i srequest
+npm i srequest_js
 ```
 # GET
 ## Async

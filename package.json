@@ -1,6 +1,6 @@
 {
-  "name": "srequest",
-  "version": "0.0.0s0",
+  "name": "srequest_js",
+  "version": "0.0.0s1",
   "description": "",
   "main": "index.mjs",
   "repository": {
@@ -12,5 +12,6 @@
   "bugs": {
     "url": "https://github.com/vssizoff/SRequest/issues"
   },
-  "homepage": "https://github.com/vssizoff/SRequest#readme"
+  "homepage": "https://github.com/vssizoff/SRequest#readme",
+  "readme": "README.md"
 }
