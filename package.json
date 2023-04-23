@@ -1,0 +1,16 @@
+{
+  "name": "srequest",
+  "version": "0.0.0s0",
+  "description": "",
+  "main": "index.mjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vssizoff/SRequest.git"
+  },
+  "author": "sizoff",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vssizoff/SRequest/issues"
+  },
+  "homepage": "https://github.com/vssizoff/SRequest#readme"
+}

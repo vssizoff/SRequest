@@ -17,7 +17,7 @@ function configValidatorBody(oldCfg, newCfg){
     return newCfg;
 }
 
-function configValidator(oldCfg, newCfg) {
+export function configValidator(oldCfg, newCfg) {
     if (oldCfg !== undefined && newCfg !== undefined){
         return configValidatorBody(oldCfg, newCfg)
     }
