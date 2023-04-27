@@ -2,7 +2,7 @@
 # Importing
 ## CDN
 ```html
-<script src="https://cdn.jsdelivr.net/gh/vssizoff/SRequest/cdn.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/srequest_js/cdn.js"></script>
 ```
 ## NPM
 ```
