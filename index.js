@@ -2,6 +2,7 @@ import fetchSync from "sync-fetch";
 import fetch from "node-fetch";
 import SRequestParsers from "./parse.js";
 import {WebSocket} from "ws";
+import {GqlOptionsType} from "./@types/index.js";
 
 let defaultOptions = {
     query: {},
@@ -264,15 +265,15 @@ class SGraphqlSubSubscription {
     }
 }
 
-class SGraphqlSubscription {
+export class SGraphqlSubscription {
     subSubscriptions = {};
     openHandlers = [];
     connection;
     url;
 
-    constructor(url) {
-        this.url = url;
-        SWebSocket(url).then(connection => {
+    constructor(url, {params, query} = defaultGqlOptions) {
+        this.url = SRequestParsers.params(url, params) + (query !== undefined ? SRequestParsers.query(query) : "");
+        SWebSocket(this.url).then(connection => {
             connection.onMessage(data => {
                 switch (data.type) {
                     case "connection_ack":
@@ -321,7 +322,6 @@ class SGraphqlSubscription {
 }
 
 export async function SGraphql(url, query, {params, query: queryParams, ...options} = defaultGqlOptions) {
-    url = SRequestParsers.params(url, params) + (queryParams !== undefined ? SRequestParsers.query(queryParams) : "");
     if (url.startsWith("ws")) {
         return new Promise((resolve, reject) => {
             let connection = new SGraphqlSubscription(url);
@@ -331,32 +331,21 @@ export async function SGraphql(url, query, {params, query: queryParams, ...optio
             });
         });
     }
+    url = SRequestParsers.params(url, params) + (queryParams !== undefined ? SRequestParsers.query(queryParams) : "");
     return SPost(url, {...options, query});
+}
+
+export async function SGraphqlQM(url, query, options) {
+    if (url.startsWith("ws")) return 0;
+    return SGraphql(url, query, options);
+}
+
+export async function SGraphqlS(url, query, options) {
+    if (url.startsWith("http")) return 0;
+    return SGraphql(url, query, options);
 }
 
 export function SGraphqlSync(url, query, {params, query: queryParams, ...options} = defaultGqlOptions) {
     url = SRequestParsers.params(url, params) + (queryParams !== undefined ? SRequestParsers.query(queryParams) : "");
     return SPostSync(url, {...options, query});
 }
-
-// console.log(SGraphqlSync("http://localhost:8888/graphql", `
-//     mutation CreateUser {
-//         createUser(input: { data: "[pgk[irptjh[o", username: "test" }) {
-//             id
-//             data
-//             username
-//         }
-//     }
-// `).body.data);
-
-SGraphql("ws://localhost:8888/graphql", `
-    subscription CreateUserSubscribe {
-        createUserSubscribe {
-            id
-            data
-            username
-        }
-    }
-`).then(connection => connection.onMessage(data => {
-    console.log(data);
-}));

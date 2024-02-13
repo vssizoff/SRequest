@@ -5,7 +5,8 @@ export type OptionsType = {
     query?: {[key: string]: string},
     headers?: {[key: string]: string},
     params?: {[key: string]: string},
-    body?: any
+    body?: any,
+    [key: string]: any
 };
 
 export type MethodsType = "post" | "get" | "put" | "head" | "delete" | "options" | "connect" | "patch" | "Post" | "Get"
@@ -65,7 +66,8 @@ export function SPatchSync(url: string, options?: OptionsType, onError?: ErrorHa
 
 export type WSOptionsType = {
     query?: {[key: string]: string},
-    params?: {[key: string]: string}
+    params?: {[key: string]: string},
+    [key: string]: any
 };
 
 export type BufferLike =
@@ -112,3 +114,47 @@ declare class SWebsocket {
 }
 
 export function SWebSocket(url: string, options?: WSOptionsType): Promise<SWebsocket>;
+
+export type GqlOptionsType = {
+    query?: {[key: string]: string},
+    params?: {[key: string]: string},
+    [key: string]: any
+}
+
+declare class SGraphqlSubSubscription {
+    messageHandlers: Array<(this: SGraphqlSubSubscription, data: object) => void>;
+    parent: SGraphqlSubscription
+
+    constructor(parent: SGraphqlSubscription);
+
+    onMessage(callback: (this: SGraphqlSubSubscription, data: object) => void): void;
+
+    emit(data: object): void;
+}
+
+export class SGraphqlSubscription {
+    subSubscriptions: {[key: string]: SGraphqlSubSubscription};
+    openHandlers: Array<(this: SGraphqlSubscription) => void>;
+    connection: SWebsocket;
+    url: string;
+
+    constructor(url: string, options?: {query?: {[key: string]: string}, params?: {[key: string]: string}});
+
+    createId(): string;
+
+    subscribe(query: string, options: Omit<Omit<GqlOptionsType, "query">, "params">): SGraphqlSubSubscription;
+
+    onOpen(callback: (this: SGraphqlSubscription) => void): void;
+
+    onClose(callback: Parameters<typeof SWebsocket.prototype.onClose>[0]): void;
+
+    onError(callback: Parameters<typeof SWebsocket.prototype.onError>[0]): void;
+}
+
+export function SGraphql(url: string, query: string, options: GqlOptionsType): Promise<SResponseType | SGraphqlSubSubscription>;
+
+export function SGraphqlQM(url: string, query: string, options: GqlOptionsType): Promise<SResponseType>;
+
+export function SGraphqlS(url: string, query: string, options: GqlOptionsType): Promise<SGraphqlSubSubscription>;
+
+export function SGraphqlSync(url: string, query: string, options: GqlOptionsType): SResponseType;
