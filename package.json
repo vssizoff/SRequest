@@ -1,8 +1,8 @@
 {
   "name": "srequest_js",
-  "version": "0.0.0s4",
+  "version": "0.2.0s2",
   "description": "",
-  "main": "index.mjs",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vssizoff/SRequest.git"
@@ -14,5 +14,19 @@
   },
   "homepage": "https://github.com/vssizoff/SRequest#readme",
   "readme": "README.md",
-  "keywords": ["fetch", "http", "promise", "request", "xhr"]
+  "keywords": [
+    "fetch",
+    "http",
+    "promise",
+    "request",
+    "xhr"
+  ],
+  "dependencies": {
+    "@types/ws": "^8.5.10",
+    "node-fetch": "^3.3.1",
+    "sync-fetch": "^0.4.2",
+    "ws": "^8.16.0"
+  },
+  "type": "module",
+  "types": "./@types/index.d.ts"
 }
